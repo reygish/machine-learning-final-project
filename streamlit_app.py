@@ -7,14 +7,17 @@ from nltk.tag import pos_tag
 from string import punctuation
 import nltk
 
-@st.cache_resource
-def download_nltk_data():
+try:
+    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('taggers/averaged_perceptron_tagger')
+    nltk.data.find('corpora/wordnet')
+    nltk.data.find('corpora/stopwords')
+except LookupError:
     nltk.download('punkt', quiet=True)
     nltk.download('averaged_perceptron_tagger', quiet=True)
     nltk.download('wordnet', quiet=True)
     nltk.download('stopwords', quiet=True)
-
-download_nltk_data()
+    st.rerun()
 
 @st.cache_resource
 def load_models():
