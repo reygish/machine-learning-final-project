@@ -5,19 +5,13 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.tag import pos_tag
 from string import punctuation
-import nltk
 
-try:
-    nltk.data.find('tokenizers/punkt')
-    nltk.data.find('taggers/averaged_perceptron_tagger')
-    nltk.data.find('corpora/wordnet')
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('punkt', quiet=True)
-    nltk.download('averaged_perceptron_tagger', quiet=True)
-    nltk.download('wordnet', quiet=True)
-    nltk.download('stopwords', quiet=True)
-    st.rerun()
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+nltk.download('stopwords')
+
 
 @st.cache_resource
 def load_models():
@@ -33,6 +27,7 @@ def load_models():
 models, vectorizer = load_models()
 
 ENGLISH_STOPWORDS = set(stopwords.words('english'))
+
 lemmatizer = WordNetLemmatizer()
 
 def tag_to_wordnet(tag: str):
