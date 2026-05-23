@@ -5,6 +5,16 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.tag import pos_tag
 from string import punctuation
+import nltk
+
+@st.cache_resource
+def download_nltk_data():
+    nltk.download('punkt', quiet=True)
+    nltk.download('averaged_perceptron_tagger', quiet=True)
+    nltk.download('wordnet', quiet=True)
+    nltk.download('stopwords', quiet=True)
+
+download_nltk_data()
 
 @st.cache_resource
 def load_models():
